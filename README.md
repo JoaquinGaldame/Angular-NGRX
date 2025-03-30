@@ -2,13 +2,14 @@
 Este Proyecto fue generado con [Angular CLI](https://github.com/angular/angular-cli) version 12.2.6.
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.6.
 
-## ¿Qué es NgRx?
-NgRx es un `framework` para crear aplicaciones reactivas en Angular. `NgRx` proporciona bibliotecas para:
+## ¿Qué es [NgRx](https://ngrx.io/)?
+[NgRx](https://ngrx.io/) es un `framework` para crear aplicaciones reactivas en Angular. **NgRx** proporciona bibliotecas para:
 - Gestión del estado global y local.
 - Aislamiento de efectos secundarios para promover una arquitectura de componentes más limpia.
 - Gestión de cobros de entidades.
 - Integración con el routing de angular.
 - Herramientas para desarrolladores que mejoran la experiencia del desarrollador al crear muchos tipos diferentes de aplicaciones.
+
 
 ## Desarrollo Web Página Principal.
 <img src="src/assets/images/DataProject/main.PNG">
@@ -16,18 +17,22 @@ Este proyecto tiene fines educativos y se desarrolló en base al patrón de dise
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-Una vista del desarrollo realizado nos muetra la herramienta Redux-DevTools y lo potente que es para realizar el seguimiento de estado y acciones de nuestra aplicación:
+Una vista del desarrollo realizado nos muestra la herramienta Redux-DevTools y lo potente que es para realizar el seguimiento de estado y acciones de nuestra aplicación:
+
 ### Acción Load Items 
-(Acción previa de los items, mostrando un Spinner antes de mostrar/cargar cada items en nuestra página showCase).
+Visualización de Acción previa de los items, mostrando un Spinner antes de mostrar/cargar cada items en nuestra página showCase.
 <img src="src/assets/images/DataProject/LoadItemsAction.PNG">
 
 ### Acción Load Items 
-(Acción de carga exitosa de los items, mostrando el resultado de la visualización de todos los items obtenidos del Service).
+Visualización de acción de carga exitosa de los items, mostrando el resultado de la visualización de todos los items obtenidos del Service.
 <img src="src/assets/images/DataProject/LoadedItemsAction.PNG">
 
-Los paquetes NgRx se dividen en categorías.
+Los paquetes NgRx se dividen en categorías. Para entender el desarrollo básico de Redux, nuestra aplicación trabaja como lo indica el siguiente diagrama provisto por la documentacion de NgRx:
+<img src="src/assets/images/DataProject/state-management-lifecycle.PNG">
 
-## Store
+
+
+## [Store](https://ngrx.io/guide/store)
 Comenzamos instalando el paquete `@ngrx/store`:
 - `ng add @ngrx/store@latest`
 - `ng add @ngrx/store@12` (En esta versión de Angular).
@@ -43,9 +48,9 @@ Luego también en nuestro `app.module.ts` se nos agrega temporalmente la definic
 `StoreDevtoolsModule.instrument({ name: 'TEST' })`
 
 Nota: En nuestro caso instalamos la extensión del navegador `Redux DevTools` para visualizar la consola de Redux vista anteriormente.
+<img src="src/assets/images/DataProject/ReduxTools.PNG" style="height: 150px; widht: 150px;">
 
-
-Quedando el App.module.ts ([Angular CLI](https://github.com/angular/angular-cli)) de la siguiente manera:
+Quedando el App.module.ts ([Angular CLI](https://github.com/angular/angular-cli) version 12.2.6) de la siguiente manera:
 ```typescript
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -74,15 +79,25 @@ export class AppModule { }
 ```
 
 La estructura de nuestro proyecto la organizamos de la siguiente manera (es solo una conveción, existen otras):
-/state  
-  ├── actions/  
-  ├── reducers/  
-  ├── effects/  
-  ├── selectors/
-  ├── app.state.ts
+<div>
+  <p>/state</p>
+  <ul>
+    <li>├── actions/</li>
+    <li>├── reducers/</li>
+    <li>├── effects/  </li>
+    <li>├── selectors/</li>
+    <li>├── app.state.ts</li>
+  </ul>
+</div>
 
+ ### ¿Qué son las FUNCIONES PURAS?
+ Una **función pura** puede sonar a un concepto abstracto pero básicamente es una `función simple`, y precisamente esa simplicidad hace que no se nos dificulte entenderla. Entonces decimos que una función es pura cuando cumple con los siguientes requísitos:
+- **Transparencia referencial**: Dados los mismos inputs(argumentos) siempre retorna lo mismo.
+- **No tiene efectos colaterales**: No modifica variables fuera de su ámbito, ni muta sus argumentos, ni interactúa con el mundo exterior.
+Este concepto será clave para entender el código que debemos desarrollar en este patrón de diseño.
 
-### Actions
+### [Actions](https://ngrx.io/guide/store/actions)
+Las acciones son uno de los componentes principales de NgRx. Expresan eventos únicos que ocurren en toda la aplicación. Desde la interacción del usuario con la página, la interacción externa mediante solicitudes de red y la interacción directa con las API del dispositivo, estos y otros eventos se describen con acciones.
 En este archivo definimos todas las acciones que serán disparadas por nuestros componentes y que "escucharán" los reducers:
 ```typescript
 import { ItemModel } from "@core/models/Item.interface";
@@ -99,7 +114,9 @@ export const loadedItems = createAction(
 ```
 
 
-### Reducers
+
+### [Reducers](https://ngrx.io/guide/store/reducers)
+Los reductores en NgRx se encargan de gestionar las transiciones de un estado a otro en la aplicación. Las funciones reductoras gestionan estas transiciones determinando qué acciones gestionar según su tipo.
 En el `Reducer` recibiremos la acción que se dispara y trabajaremos con los diferentes estados de la aplicación, definiendo `initialState` que incializa el `loading`  y `items` arreglo de items que utilizara nuestro componente:
 ```typescript
 import { createReducer, on } from "@ngrx/store";
@@ -118,6 +135,8 @@ export const itemsReducer = createReducer(
   })
 )
 ```
+
+
 
 ### Store AppState
 Aquí definimos el ESTADO INICIAL de nuestra aplicación `AppState` que luego exportaremos como una constante para registrarlo en nuestro `app.module.ts`. Esto es convencional y permite que luego se pueda definir los estados de otros componentes dentro de `AppState`.  
@@ -147,7 +166,17 @@ export interface ItemState {
 ```
 Que luego integraremos en el estado inicial de nuestra aplicación General, como hemos visto anteriormente definido en `AppState`. 
 
-### Selectors
+
+
+### [Selectors](https://ngrx.io/guide/store/selectors)
+Los `Selectors` son funciones puras que se utilizan para obtener fragmentos del estado del Store. @ngrx/store proporciona algunas funciones auxiliares para optimizar esta selección. Los selectores ofrecen diversas funciones al seleccionar fragmentos del estado:
+- Portabilidad
+- Memorización
+- Composición
+- Capacidad de prueba
+- Seguridad de tipos
+Al usar las funciones `createSelector` y `createFeatureSelector`, @ngrx/store registra los últimos argumentos en los que se invocó la función selectora.
+
 ```typescript
 import { createSelector } from "@ngrx/store";
 import { AppState } from "../app.state";
@@ -168,7 +197,15 @@ export const selectLoading = createSelector(
 ```
 
 
-## Effects
+
+### Effects
+Los Efectos son un modelo de efectos secundarios basado en RxJS para Store. Utilizan flujos para proporcionar nuevas fuentes de acciones que reducen el estado según interacciones externas, como solicitudes de red, mensajes de web socket y eventos temporales. Es decir, lo que recibamos de nuestro Service (datos obtenidos de nuestra API) será la fuente de información que recibimos al disparar una determinada acción.
+Primero debemos instalar `@ngrx/efectos` con los siguientes comandos:
+- `ng add @ngrx/effects@latest`    
+- `ng add @ngrx/effects@12` (En esta versión de Angular)
+
+Luego desarrollamos el código en nuestro archivo `items.effects.ts` de la siguiente manera, donde `loadItem$` es un efecto creado que se activa cuando se despacha la acción `LoadItems` y lo que recibimos del `service` es un arreglo de datos que será devuelto activando la acción `LoadedItems`, dicha acción se definió con `props` que nos indica que espera un arreglo de datos llamado items del tipo `ItemModel`.
+
 ```typescript
 import { Injectable } from "@angular/core";
 import { ShowCaseService } from "@modules/show-case/services/show-case.service";
@@ -196,7 +233,9 @@ export class ItemsEffect {
 }
 ```
 
-Finalmente nuestros componentes despacharán solo las acciones, así mantedremos la prolijidad de nuestro código y repartiremos las responsabilidades.
+
+
+Finalmente nuestros componentes despacharán solo las acciones, así mantedremos la prolijidad de nuestro código limpio y repartiremos las responsabilidades.
 
 ## Show Case Component (Base)
 ### show-case.component.ts
@@ -229,6 +268,7 @@ export class ShowCasePageComponent implements OnInit {
 }
 ```
 
+
 ### show-case.component.html
 ```typescript
 <div class="ui-gap">
@@ -243,7 +283,9 @@ export class ShowCasePageComponent implements OnInit {
 ```
 
 
+
 ## UI Block Component (Show Case's Component)
+Componente que lista todos los items en un cuadro de información.
 
 ### ui-block-item.component.ts
 ```typescript
