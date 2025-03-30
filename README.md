@@ -198,7 +198,7 @@ export const selectLoading = createSelector(
 
 
 
-### Effects
+### [Effects](https://ngrx.io/guide/effects)
 Los Efectos son un modelo de efectos secundarios basado en RxJS para Store. Utilizan flujos para proporcionar nuevas fuentes de acciones que reducen el estado según interacciones externas, como solicitudes de red, mensajes de web socket y eventos temporales. Es decir, lo que recibamos de nuestro Service (datos obtenidos de nuestra API) será la fuente de información que recibimos al disparar una determinada acción.
 Primero debemos instalar `@ngrx/efectos` con los siguientes comandos:
 - `ng add @ngrx/effects@latest`    
@@ -321,5 +321,20 @@ export class UiBlockItemComponent implements OnInit {
     <app-ui-item [item]="item" *ngFor="let item of items$ | async"></app-ui-item>
 </div>
 ```
+
+## Otros paquetes de NgRx (advanced)
+### [@ngrx/signals](https://ngrx.io/guide/signals) 
+NgRx Signals es una biblioteca independiente que proporciona una solución de gestión de estado reactivo y un conjunto de utilidades para Angular Signals. Es una solución de gestión de estado para aplicaciones Angular que combina lo mejor de las señales (signals) de Angular con el patrón de almacenamiento de NgRx. Sirve principalmente para:
+- Gestión reactiva del estado
+- Organización estructurada
+- Herramientas integradas
+
+**🚗📊 Metáfora del SignalStore:** Imagina que tu aplicación Angular es un auto de carreras. El motor son tus componentes (usan datos) y el **tablero de control** (velocímetro, combustible, etc.) es el SignalStore que te permite mostrar datos en tiempo real (señales reactivas), tiene botones para cambiar el estado (acciones/métodos) y actualiza automáticamente todas las partes del auto cuando algo cambia.
+
+
+### [@ngrx/router-store](https://ngrx.io/guide/router-store)
+Enlaces para conectar el router de Angular con Store. Durante cada ciclo de navegación del router, se envían múltiples acciones que permiten detectar cambios en su estado.
+
+**🗺️🚘 Metáfora del Router-store:** Imagina tu aplicación Angular como un viaje en auto donde las carreteras y rutas son las URLs de tu app (/home, /products) y el **GPS** es el router-store. Entonces con el GPS se puede saber en todo momento dónde estás (guarda la ruta actual), te permite tomar decisiones basadas en la ubicación (ej: mostrar datos según el ID en la URL) y se registra el historial de navegación (como un viaje guardado).
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
