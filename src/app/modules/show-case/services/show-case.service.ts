@@ -14,64 +14,64 @@ export class ShowCaseService {
     //TODO: Aqui podemos hacer http.get('api...')
     const data = [
       {
-        name: "Pudgy Penguin #1",
+        name: "Random Item #1",
         price: 0.2,
-        image: "https://api.pudgypenguins.io/penguin/image/1"
+        image: "https://picsum.photos/id/237/200/300"
       },
       {
-        name: "Pudgy Penguin #2",
+        name: "Random Item #2",
         price: 0.1,
-        image: "https://api.pudgypenguins.io/penguin/image/2"
+        image: "https://picsum.photos/id/11/2500/1667"
       },
       {
-        name: "Pudgy Penguin #3",
+        name: "Random Item #3",
         price: 0.3,
-        image: "https://api.pudgypenguins.io/penguin/image/3"
+        image: "https://picsum.photos/id/21/3008/2008"
       },
       {
-        name: "Pudgy Penguin #4",
+        name: "Random Item #4",
         price: 0.4,
-        image: "https://api.pudgypenguins.io/penguin/image/4"
+        image: "https://picsum.photos/id/22/4434/3729"
       },
       {
-        name: "Pudgy Penguin #5",
+        name: "Random Item #5",
         price: 0.5,
-        image: "https://api.pudgypenguins.io/penguin/image/5"
+        image: "https://picsum.photos/id/27/3264/1836"
       },
       {
-        name: "Pudgy Penguin #6",
+        name: "Random Item #6",
         price: 0.6,
-        image: "https://api.pudgypenguins.io/penguin/image/6"
+        image: "https://picsum.photos/id/28/4928/3264"
       },
       {
-        name: "Pudgy Penguin #7",
+        name: "Random Item #7",
         price: 0.7,
-        image: "https://api.pudgypenguins.io/penguin/image/7"
+        image: "https://picsum.photos/id/23/3887/4899"
       },
       {
-        name: "Pudgy Penguin #8",
+        name: "Random Item #8",
         price: 0.8,
-        image: "https://api.pudgypenguins.io/penguin/image/8"
+        image: "https://picsum.photos/id/25/5000/3333"
       },
       {
-        name: "Pudgy Penguin #9",
+        name: "Random Item #9",
         price: 0.9,
-        image: "https://api.pudgypenguins.io/penguin/image/9"
+        image: "https://picsum.photos/id/26/4209/2769"
       },
       {
-        name: "Pudgy Penguin #10",
+        name: "Random Item #10",
         price: 0.9,
-        image: "https://api.pudgypenguins.io/penguin/image/10"
+        image: "https://picsum.photos/id/7/4728/3168"
       },
       {
-        name: "Pudgy Penguin #11",
+        name: "Random Item #11",
         price: 0.9,
-        image: "https://api.pudgypenguins.io/penguin/image/11"
+        image: "https://picsum.photos/id/6/5000/3333"
       },
       {
-        name: "Pudgy Penguin #12",
+        name: "Random Item #12",
         price: 0.9,
-        image: "https://api.pudgypenguins.io/penguin/image/12"
+        image: "https://picsum.photos/id/4/5000/3333"
       }
     ]
 
